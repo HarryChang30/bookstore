@@ -32,8 +32,8 @@ func init() {
 
 	username := os.Getenv(mysqlUsersUsername)
 	password := os.Getenv(mysqlUsersPassword)
-	host     := os.Getenv(mysqlUsersHost)
-	schema   := os.Getenv(mysqlUsersSchema)
+	host := os.Getenv(mysqlUsersHost)
+	schema := os.Getenv(mysqlUsersSchema)
 
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", username, password, host, schema)
 

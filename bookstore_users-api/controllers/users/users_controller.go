@@ -37,7 +37,21 @@ func CreateUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, result.Marshall(true))
 }
 
-func GetUser(c *gin.Context) {}
+func GetUser(c *gin.Context) {
+	userId, err := getUserId(c.Param("user_id"))
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+
+	user, err := services.UsersService.GetUser(userId)
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+
+	c.JSON(http.StatusOK, user.Marshall(false))
+}
 
 func SearchUser(c *gin.Context) {
 	status := c.Query("status")

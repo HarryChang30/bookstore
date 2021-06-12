@@ -1,5 +1,7 @@
 package users
 
+import "encoding/json"
+
 type PublicUser struct {
 	Id          int64  `json:"id"`
 	DateCreated string `json:"date_created"`
@@ -31,6 +33,8 @@ func (user *User) Marshall(isPublic bool) interface{} {
 			Status:      user.Status,
 		}
 	}
+	userJson, _ := json.Marshal(user)
 	var privateUser PrivateUser
+	json.Unmarshal(userJson, &privateUser)
 	return privateUser
 }
